@@ -1,0 +1,572 @@
+GeoIP-Anonymous-Plus-Test.mmdb
+  database_type  GeoIP-Anonymous-Plus
+  description    map[en:GeoIP Anonymous Plus Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     677
+  build_epoch    1770246697 (2026-02-04)
+  networks       647, 615 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 1.2.0.0)
+  anonymizer_confidence    Uint16          2 networks  values [30 99]
+  is_anonymous             Bool           32 networks  values [true]
+  is_anonymous_vpn         Bool           24 networks  values [true]
+  is_hosting_provider      Bool            3 networks  values [true]
+  is_public_proxy          Bool            5 networks  values [true]
+  is_residential_proxy     Bool            2 networks  values [true]
+  is_tor_exit_node         Bool            3 networks  values [true]
+  network_last_seen        String          2 networks  values [2025-04-14]
+  provider_name            String          2 networks  values [foo]
+  shapes:
+    anonymous+anonymous_vpn                       22 networks
+      anonymizer_confidence    Uint16        2  values [30 99]
+      network_last_seen        String        2  values [2025-04-14]
+      provider_name            String        2  values [foo]
+    anonymous+anonymous_vpn+hosting_provider+public_proxy+residential_proxy+tor_exit_node     1 networks
+    anonymous+anonymous_vpn+tor_exit_node          1 networks
+    anonymous+hosting_provider                     2 networks
+    anonymous+public_proxy                         4 networks
+    anonymous+residential_proxy                    1 networks
+    anonymous+tor_exit_node                        1 networks
+GeoIP-Residential-Proxy-Test.mmdb
+  database_type  GeoIP-Residential-Proxy
+  description    map[en:GeoIP Residential Proxy Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     1120
+  build_epoch    1778851200 (2026-05-15)
+  networks       29, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 1.2.0.4)
+  anonymizer_confidence    Uint16         28 networks  range [1 .. 95]
+  network_last_seen        String         29 networks  all YYYY-MM-DD
+  provider_name            String         29 networks
+  shapes:
+    (no flags)                                    29 networks
+      anonymizer_confidence    Uint16       28  range [1 .. 95]
+      network_last_seen        String       29  all YYYY-MM-DD
+      provider_name            String       29
+GeoIP2-Anonymous-IP-Test.mmdb
+  database_type  GeoIP2-Anonymous-IP
+  description    map[en:GeoIP2 Anonymous IP Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     629
+  build_epoch    1770245369 (2026-02-04)
+  networks       599, 587 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 1.2.0.0)
+  is_anonymous             Bool           12 networks  values [true]
+  is_anonymous_vpn         Bool            4 networks  values [true]
+  is_hosting_provider      Bool            3 networks  values [true]
+  is_public_proxy          Bool            5 networks  values [true]
+  is_residential_proxy     Bool            2 networks  values [true]
+  is_tor_exit_node         Bool            3 networks  values [true]
+  shapes:
+    anonymous+anonymous_vpn                        2 networks
+    anonymous+anonymous_vpn+hosting_provider+public_proxy+residential_proxy+tor_exit_node     1 networks
+    anonymous+anonymous_vpn+tor_exit_node          1 networks
+    anonymous+hosting_provider                     2 networks
+    anonymous+public_proxy                         4 networks
+    anonymous+residential_proxy                    1 networks
+    anonymous+tor_exit_node                        1 networks
+GeoIP2-City-Shield-Test.mmdb
+  database_type  GeoIP2-City-Shield
+  description    map[en:GeoIP2 City Shield Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     1547
+  build_epoch    1770245369 (2026-02-04)
+  networks       250, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 2.2.3.0)
+  city                     Map            14 networks  values [map[geoname_id:1880252 names:map[de:Singapur en:Singapore es:Singapur fr:Singapour ja:シンガポール pt-BR:Singapura ru:Сингапур zh-CN:新加坡]] map[geoname_id:2038180 names:map[de:Chángchūn en:Changchun fr:Changchun ja:長春市 ru:Чанчунь zh-CN:长春]] map[geoname_id:2158177 names:map[de:Melbourne en:Melbourne es:Melbourne fr:Melbourne ja:メルボルン pt-BR:Melbourne ru:Мельбурн zh-CN:墨尔本]] map[geoname_id:2643743 names:map[de:London en:London es:Londres fr:Londres ja:ロンドン pt-BR:Londres ru:Лондон]] map[geoname_id:2655045 names:map[en:Boxford]] map[geoname_id:2694762 names:map[de:Linköping en:Linköping fr:Linköping ja:リンシェーピング zh-CN:林雪平]] map[geoname_id:5391811 names:map[de:San Diego en:San Diego es:San Diego fr:San Diego ja:サンディエゴ pt-BR:San Diego ru:Сан-Диего]] map[geoname_id:5803556 names:map[en:Milton ru:Мильтон]]]
+  continent                Map           249 networks  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:OC geoname_id:6255151 names:map[de:Ozeanien en:Oceania es:Oceanía fr:Océanie ja:オセアニア pt-BR:Oceania ru:Океания zh-CN:大洋洲]]]
+  country                  Map           246 networks
+  location                 Map           248 networks
+  postal                   Map             7 networks  values [map[code:3000] map[code:34021] map[code:59] map[code:92101] map[code:92105] map[code:98354] map[code:OX1]]
+  registered_country       Map           246 networks
+  represented_country      Map             1 networks  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+  subdivisions             Slice          15 networks  values [[map[geoname_id:2036500 iso_code:22 names:map[en:Jilin Sheng zh-CN:吉林]]] [map[geoname_id:2145234 iso_code:VIC names:map[en:Victoria pt-BR:Vitória ru:Виктория]]] [map[geoname_id:2685867 iso_code:E names:map[en:Östergötland County fr:Comté d'Östergötland]]] [map[geoname_id:5332921 iso_code:CA names:map[de:Kalifornien en:California es:California fr:Californie ja:カリフォルニア州 pt-BR:Califórnia ru:Калифорния zh-CN:加州]]] [map[geoname_id:5815135 iso_code:WA names:map[en:Washington es:Washington fr:État de Washington ja:ワシントン州 ru:Вашингтон zh-CN:华盛顿州]]] [map[geoname_id:6269131 iso_code:ENG names:map[en:England es:Inglaterra fr:Angleterre pt-BR:Inglaterra]] map[geoname_id:3333217 iso_code:WBK names:map[en:West Berkshire ru:Западный Беркшир zh-CN:西伯克郡]]] [map[geoname_id:6269131 iso_code:ENG names:map[en:England es:Inglaterra fr:Angleterre pt-BR:Inglaterra]]]]
+  traits                   Map             1 networks  values [map[is_anycast:true]]
+  shapes:
+    (no flags)                                   250 networks
+      city                     Map          14  values [map[geoname_id:1880252 names:map[de:Singapur en:Singapore es:Singapur fr:Singapour ja:シンガポール pt-BR:Singapura ru:Сингапур zh-CN:新加坡]] map[geoname_id:2038180 names:map[de:Chángchūn en:Changchun fr:Changchun ja:長春市 ru:Чанчунь zh-CN:长春]] map[geoname_id:2158177 names:map[de:Melbourne en:Melbourne es:Melbourne fr:Melbourne ja:メルボルン pt-BR:Melbourne ru:Мельбурн zh-CN:墨尔本]] map[geoname_id:2643743 names:map[de:London en:London es:Londres fr:Londres ja:ロンドン pt-BR:Londres ru:Лондон]] map[geoname_id:2655045 names:map[en:Boxford]] map[geoname_id:2694762 names:map[de:Linköping en:Linköping fr:Linköping ja:リンシェーピング zh-CN:林雪平]] map[geoname_id:5391811 names:map[de:San Diego en:San Diego es:San Diego fr:San Diego ja:サンディエゴ pt-BR:San Diego ru:Сан-Диего]] map[geoname_id:5803556 names:map[en:Milton ru:Мильтон]]]
+      continent                Map         249  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:OC geoname_id:6255151 names:map[de:Ozeanien en:Oceania es:Oceanía fr:Océanie ja:オセアニア pt-BR:Oceania ru:Океания zh-CN:大洋洲]]]
+      country                  Map         246
+      location                 Map         248
+      postal                   Map           7  values [map[code:3000] map[code:34021] map[code:59] map[code:92101] map[code:92105] map[code:98354] map[code:OX1]]
+      registered_country       Map         246
+      represented_country      Map           1  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+      subdivisions             Slice        15  values [[map[geoname_id:2036500 iso_code:22 names:map[en:Jilin Sheng zh-CN:吉林]]] [map[geoname_id:2145234 iso_code:VIC names:map[en:Victoria pt-BR:Vitória ru:Виктория]]] [map[geoname_id:2685867 iso_code:E names:map[en:Östergötland County fr:Comté d'Östergötland]]] [map[geoname_id:5332921 iso_code:CA names:map[de:Kalifornien en:California es:California fr:Californie ja:カリフォルニア州 pt-BR:Califórnia ru:Калифорния zh-CN:加州]]] [map[geoname_id:5815135 iso_code:WA names:map[en:Washington es:Washington fr:État de Washington ja:ワシントン州 ru:Вашингтон zh-CN:华盛顿州]]] [map[geoname_id:6269131 iso_code:ENG names:map[en:England es:Inglaterra fr:Angleterre pt-BR:Inglaterra]] map[geoname_id:3333217 iso_code:WBK names:map[en:West Berkshire ru:Западный Беркшир zh-CN:西伯克郡]]] [map[geoname_id:6269131 iso_code:ENG names:map[en:England es:Inglaterra fr:Angleterre pt-BR:Inglaterra]]]]
+      traits                   Map           1  values [map[is_anycast:true]]
+GeoIP2-City-Test.mmdb
+  database_type  GeoIP2-City
+  description    map[en:GeoIP2 City Test Database (fake GeoIP2 data, for example purposes only) zh:小型数据库]
+  languages      [en zh]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     1547
+  build_epoch    1770245369 (2026-02-04)
+  networks       250, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 2.2.3.0)
+  city                     Map            14 networks  values [map[geoname_id:1880252 names:map[de:Singapur en:Singapore es:Singapur fr:Singapour ja:シンガポール pt-BR:Singapura ru:Сингапур zh-CN:新加坡]] map[geoname_id:2038180 names:map[de:Chángchūn en:Changchun fr:Changchun ja:長春市 ru:Чанчунь zh-CN:长春]] map[geoname_id:2158177 names:map[de:Melbourne en:Melbourne es:Melbourne fr:Melbourne ja:メルボルン pt-BR:Melbourne ru:Мельбурн zh-CN:墨尔本]] map[geoname_id:2643743 names:map[de:London en:London es:Londres fr:Londres ja:ロンドン pt-BR:Londres ru:Лондон]] map[geoname_id:2655045 names:map[en:Boxford]] map[geoname_id:2694762 names:map[de:Linköping en:Linköping fr:Linköping ja:リンシェーピング zh-CN:林雪平]] map[geoname_id:5391811 names:map[de:San Diego en:San Diego es:San Diego fr:San Diego ja:サンディエゴ pt-BR:San Diego ru:Сан-Диего]] map[geoname_id:5803556 names:map[en:Milton ru:Мильтон]]]
+  continent                Map           249 networks  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:OC geoname_id:6255151 names:map[de:Ozeanien en:Oceania es:Oceanía fr:Océanie ja:オセアニア pt-BR:Oceania ru:Океания zh-CN:大洋洲]]]
+  country                  Map           246 networks
+  location                 Map           248 networks
+  postal                   Map             7 networks  values [map[code:3000] map[code:34021] map[code:59] map[code:92101] map[code:92105] map[code:98354] map[code:OX1]]
+  registered_country       Map           246 networks
+  represented_country      Map             1 networks  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+  subdivisions             Slice          15 networks  values [[map[geoname_id:2036500 iso_code:22 names:map[en:Jilin Sheng zh-CN:吉林]]] [map[geoname_id:2145234 iso_code:VIC names:map[en:Victoria pt-BR:Vitória ru:Виктория]]] [map[geoname_id:2685867 iso_code:E names:map[en:Östergötland County fr:Comté d'Östergötland]]] [map[geoname_id:5332921 iso_code:CA names:map[de:Kalifornien en:California es:California fr:Californie ja:カリフォルニア州 pt-BR:Califórnia ru:Калифорния zh-CN:加州]]] [map[geoname_id:5815135 iso_code:WA names:map[en:Washington es:Washington fr:État de Washington ja:ワシントン州 ru:Вашингтон zh-CN:华盛顿州]]] [map[geoname_id:6269131 iso_code:ENG names:map[en:England es:Inglaterra fr:Angleterre pt-BR:Inglaterra]] map[geoname_id:3333217 iso_code:WBK names:map[en:West Berkshire ru:Западный Беркшир zh-CN:西伯克郡]]] [map[geoname_id:6269131 iso_code:ENG names:map[en:England es:Inglaterra fr:Angleterre pt-BR:Inglaterra]]]]
+  traits                   Map             1 networks  values [map[is_anycast:true]]
+  shapes:
+    (no flags)                                   250 networks
+      city                     Map          14  values [map[geoname_id:1880252 names:map[de:Singapur en:Singapore es:Singapur fr:Singapour ja:シンガポール pt-BR:Singapura ru:Сингапур zh-CN:新加坡]] map[geoname_id:2038180 names:map[de:Chángchūn en:Changchun fr:Changchun ja:長春市 ru:Чанчунь zh-CN:长春]] map[geoname_id:2158177 names:map[de:Melbourne en:Melbourne es:Melbourne fr:Melbourne ja:メルボルン pt-BR:Melbourne ru:Мельбурн zh-CN:墨尔本]] map[geoname_id:2643743 names:map[de:London en:London es:Londres fr:Londres ja:ロンドン pt-BR:Londres ru:Лондон]] map[geoname_id:2655045 names:map[en:Boxford]] map[geoname_id:2694762 names:map[de:Linköping en:Linköping fr:Linköping ja:リンシェーピング zh-CN:林雪平]] map[geoname_id:5391811 names:map[de:San Diego en:San Diego es:San Diego fr:San Diego ja:サンディエゴ pt-BR:San Diego ru:Сан-Диего]] map[geoname_id:5803556 names:map[en:Milton ru:Мильтон]]]
+      continent                Map         249  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:OC geoname_id:6255151 names:map[de:Ozeanien en:Oceania es:Oceanía fr:Océanie ja:オセアニア pt-BR:Oceania ru:Океания zh-CN:大洋洲]]]
+      country                  Map         246
+      location                 Map         248
+      postal                   Map           7  values [map[code:3000] map[code:34021] map[code:59] map[code:92101] map[code:92105] map[code:98354] map[code:OX1]]
+      registered_country       Map         246
+      represented_country      Map           1  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+      subdivisions             Slice        15  values [[map[geoname_id:2036500 iso_code:22 names:map[en:Jilin Sheng zh-CN:吉林]]] [map[geoname_id:2145234 iso_code:VIC names:map[en:Victoria pt-BR:Vitória ru:Виктория]]] [map[geoname_id:2685867 iso_code:E names:map[en:Östergötland County fr:Comté d'Östergötland]]] [map[geoname_id:5332921 iso_code:CA names:map[de:Kalifornien en:California es:California fr:Californie ja:カリフォルニア州 pt-BR:Califórnia ru:Калифорния zh-CN:加州]]] [map[geoname_id:5815135 iso_code:WA names:map[en:Washington es:Washington fr:État de Washington ja:ワシントン州 ru:Вашингтон zh-CN:华盛顿州]]] [map[geoname_id:6269131 iso_code:ENG names:map[en:England es:Inglaterra fr:Angleterre pt-BR:Inglaterra]] map[geoname_id:3333217 iso_code:WBK names:map[en:West Berkshire ru:Западный Беркшир zh-CN:西伯克郡]]] [map[geoname_id:6269131 iso_code:ENG names:map[en:England es:Inglaterra fr:Angleterre pt-BR:Inglaterra]]]]
+      traits                   Map           1  values [map[is_anycast:true]]
+GeoIP2-Connection-Type-Test.mmdb
+  database_type  GeoIP2-Connection-Type
+  description    map[en:GeoIP2 Connection Type Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     596
+  build_epoch    1770245369 (2026-02-04)
+  networks       25, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 1.0.0.0)
+  connection_type          String         25 networks  values [Cable/DSL Cellular Corporate Satellite]
+  shapes:
+    (no flags)                                    25 networks
+      connection_type          String       25  values [Cable/DSL Cellular Corporate Satellite]
+GeoIP2-Country-Shield-Test.mmdb
+  database_type  GeoIP2-Country-Shield
+  description    map[en:GeoIP2 Country Shield Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     1704
+  build_epoch    1770245369 (2026-02-04)
+  networks       345, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 2.125.160.216)
+  continent                Map           344 networks  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+  country                  Map           342 networks
+  registered_country       Map           342 networks
+  represented_country      Map             1 networks  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+  traits                   Map             1 networks  values [map[is_anycast:true]]
+  shapes:
+    (no flags)                                   345 networks
+      continent                Map         344  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+      country                  Map         342
+      registered_country       Map         342
+      represented_country      Map           1  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+      traits                   Map           1  values [map[is_anycast:true]]
+GeoIP2-Country-Test.mmdb
+  database_type  GeoIP2-Country
+  description    map[en:GeoIP2 Country Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     1704
+  build_epoch    1770245369 (2026-02-04)
+  networks       345, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 2.125.160.216)
+  continent                Map           344 networks  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+  country                  Map           342 networks
+  registered_country       Map           342 networks
+  represented_country      Map             1 networks  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+  traits                   Map             1 networks  values [map[is_anycast:true]]
+  shapes:
+    (no flags)                                   345 networks
+      continent                Map         344  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+      country                  Map         342
+      registered_country       Map         342
+      represented_country      Map           1  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+      traits                   Map           1  values [map[is_anycast:true]]
+GeoIP2-DensityIncome-Test.mmdb
+  database_type  GeoIP2-DensityIncome
+  description    map[en:GeoIP2 DensityIncome Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     387
+  build_epoch    1770245369 (2026-02-04)
+  networks       2, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 5.83.124.0)
+  average_income           Uint32          2 networks  values [24626 32323]
+  population_density       Uint32          2 networks  values [1232 1341]
+  shapes:
+    (no flags)                                     2 networks
+      average_income           Uint32        2  values [24626 32323]
+      population_density       Uint32        2  values [1232 1341]
+GeoIP2-Domain-Test.mmdb
+  database_type  GeoIP2-Domain
+  description    map[en:GeoIP2 Domain Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     834
+  build_epoch    1770245369 (2026-02-04)
+  networks       91, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 1.2.0.0)
+  domain                   String         91 networks
+  shapes:
+    (no flags)                                    91 networks
+      domain                   String       91
+GeoIP2-Enterprise-Shield-Test.mmdb
+  database_type  GeoIP2-Enterprise-Shield
+  description    map[en:GeoIP2 Enterprise Shield Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     961
+  build_epoch    1780077382 (2026-05-29)
+  networks       32, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 1.9.127.107)
+  city                     Map            16 networks
+  continent                Map            21 networks  values [map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+  country                  Map            22 networks
+  location                 Map            21 networks
+  postal                   Map            13 networks
+  registered_country       Map            22 networks
+  represented_country      Map             1 networks  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+  subdivisions             Slice          16 networks
+  traits                   Map            31 networks
+  shapes:
+    (no flags)                                    32 networks
+      city                     Map          16
+      continent                Map          21  values [map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+      country                  Map          22
+      location                 Map          21
+      postal                   Map          13
+      registered_country       Map          22
+      represented_country      Map           1  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+      subdivisions             Slice        16
+      traits                   Map          31
+GeoIP2-Enterprise-Test.mmdb
+  database_type  GeoIP2-Enterprise
+  description    map[en:GeoIP2 Enterprise Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     961
+  build_epoch    1780077382 (2026-05-29)
+  networks       32, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 1.9.127.107)
+  city                     Map            16 networks
+  continent                Map            21 networks  values [map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+  country                  Map            22 networks
+  location                 Map            21 networks
+  postal                   Map            13 networks
+  registered_country       Map            22 networks
+  represented_country      Map             1 networks  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+  subdivisions             Slice          16 networks
+  traits                   Map            31 networks
+  shapes:
+    (no flags)                                    32 networks
+      city                     Map          16
+      continent                Map          21  values [map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+      country                  Map          22
+      location                 Map          21
+      postal                   Map          13
+      registered_country       Map          22
+      represented_country      Map           1  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+      subdivisions             Slice        16
+      traits                   Map          31
+GeoIP2-IP-Risk-Test.mmdb
+  database_type  GeoIP2-IP-Risk
+  description    map[en:GeoIP2 IP Risk Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     524
+  build_epoch    1770245369 (2026-02-04)
+  networks       13, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 6.1.2.1)
+  anonymizer_confidence    Uint16          3 networks  values [70 80 95]
+  ip_risk                  Float64        12 networks  range [25 .. 99]
+  is_anonymous             Bool            8 networks  values [true]
+  is_anonymous_vpn         Bool            4 networks  values [true]
+  is_hosting_provider      Bool            2 networks  values [true]
+  is_public_proxy          Bool            1 networks  values [true]
+  is_residential_proxy     Bool            2 networks  values [true]
+  is_tor_exit_node         Bool            2 networks  values [true]
+  network_last_seen        String          2 networks  values [2025-01-10 2025-01-15]
+  provider_name            String          3 networks  values [ProxyCorp ResidentialNet Test VPN Service]
+  shapes:
+    (no flags)                                     5 networks
+      ip_risk                  Float64       5  values [45 65 85 99]
+    anonymous+anonymous_vpn                        2 networks
+      anonymizer_confidence    Uint16        1  values [95]
+      ip_risk                  Float64       2  values [25 75]
+      network_last_seen        String        1  values [2025-01-15]
+      provider_name            String        1  values [Test VPN Service]
+    anonymous+anonymous_vpn+residential_proxy+tor_exit_node     1 networks
+      ip_risk                  Float64       1  values [90]
+    anonymous+anonymous_vpn+tor_exit_node          1 networks
+      ip_risk                  Float64       1  values [50]
+    anonymous+hosting_provider                     2 networks
+      anonymizer_confidence    Uint16        2  values [70 80]
+      ip_risk                  Float64       2  values [30 60]
+    anonymous+public_proxy                         1 networks
+      network_last_seen        String        1  values [2025-01-10]
+      provider_name            String        1  values [ProxyCorp]
+    anonymous+residential_proxy                    1 networks
+      ip_risk                  Float64       1  values [45]
+      provider_name            String        1  values [ResidentialNet]
+GeoIP2-ISP-Test.mmdb
+  database_type  GeoIP2-ISP
+  description    map[en:GeoIP2 ISP Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     6692
+  build_epoch    1770245369 (2026-02-04)
+  networks       2129, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 1.0.128.0)
+  autonomous_system_number Uint32        739 networks  range [3 .. 262589]
+  autonomous_system_organization String        536 networks
+  isp                      String       1377 networks
+  mobile_country_code      String          1 networks  values [310]
+  mobile_network_code      String          1 networks  values [004]
+  organization             String       1593 networks
+  shapes:
+    (no flags)                                  2129 networks
+      autonomous_system_number Uint32      739  range [3 .. 262589]
+      autonomous_system_organization String      536
+      isp                      String     1377
+      mobile_country_code      String        1  values [310]
+      mobile_network_code      String        1  values [004]
+      organization             String     1593
+GeoIP2-Precision-Enterprise-Shield-Test.mmdb
+  database_type  GeoIP2-Precision-Enterprise-Shield
+  description    map[en:GeoIP2 Precision Enterprise Shield Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     1259
+  build_epoch    1770246697 (2026-02-04)
+  networks       59, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 1.9.127.107)
+  city                     Map            33 networks
+  continent                Map            43 networks  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+  country                  Map            44 networks
+  location                 Map            43 networks
+  postal                   Map            24 networks
+  registered_country       Map            44 networks
+  represented_country      Map             1 networks  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+  subdivisions             Slice          35 networks
+  traits                   Map            49 networks
+  shapes:
+    (no flags)                                    59 networks
+      city                     Map          33
+      continent                Map          43  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+      country                  Map          44
+      location                 Map          43
+      postal                   Map          24
+      registered_country       Map          44
+      represented_country      Map           1  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+      subdivisions             Slice        35
+      traits                   Map          49
+GeoIP2-Precision-Enterprise-Test.mmdb
+  database_type  GeoIP2-Precision-Enterprise
+  description    map[en:GeoIP2 Precision Enterprise Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     1259
+  build_epoch    1770246697 (2026-02-04)
+  networks       59, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 1.9.127.107)
+  city                     Map            33 networks
+  continent                Map            43 networks  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+  country                  Map            44 networks
+  location                 Map            43 networks
+  postal                   Map            24 networks
+  registered_country       Map            44 networks
+  represented_country      Map             1 networks  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+  subdivisions             Slice          35 networks
+  traits                   Map            49 networks
+  shapes:
+    (no flags)                                    59 networks
+      city                     Map          33
+      continent                Map          43  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+      country                  Map          44
+      location                 Map          43
+      postal                   Map          24
+      registered_country       Map          44
+      represented_country      Map           1  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+      subdivisions             Slice        35
+      traits                   Map          49
+GeoIP2-Static-IP-Score-Test.mmdb
+  database_type  GeoIP2-Static-IP-Score
+  description    map[en:GeoIP2 Static IP Score Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     646
+  build_epoch    1770245369 (2026-02-04)
+  networks       586, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 1.0.0.0)
+  score                    Float64       586 networks  range [0.01 .. 4.26]
+  shapes:
+    (no flags)                                   586 networks
+      score                    Float64     586  range [0.01 .. 4.26]
+GeoIP2-User-Count-Test.mmdb
+  database_type  GeoIP2-User-Count
+  description    map[en:GeoIP2 User Count Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     646
+  build_epoch    1770245369 (2026-02-04)
+  networks       586, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 1.0.0.0)
+  ipv4_24                  Uint32        203 networks  values [0 1 4]
+  ipv4_32                  Uint32        203 networks  values [0 1 3]
+  ipv6_32                  Uint32        383 networks  values [0 1 5]
+  ipv6_48                  Uint32        383 networks  values [0 1 2 4]
+  ipv6_64                  Uint32        383 networks  values [0 1 2 3]
+  shapes:
+    (no flags)                                   586 networks
+      ipv4_24                  Uint32      203  values [0 1 4]
+      ipv4_32                  Uint32      203  values [0 1 3]
+      ipv6_32                  Uint32      383  values [0 1 5]
+      ipv6_48                  Uint32      383  values [0 1 2 4]
+      ipv6_64                  Uint32      383  values [0 1 2 3]
+GeoLite2-ASN-Test.mmdb
+  database_type  GeoLite2-ASN
+  description    map[en:GeoLite2 ASN Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     1341
+  build_epoch    1770245369 (2026-02-04)
+  networks       412, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 1.0.0.0)
+  autonomous_system_number Uint32        412 networks  range [3 .. 55817]
+  autonomous_system_organization String        351 networks
+  shapes:
+    (no flags)                                   412 networks
+      autonomous_system_number Uint32      412  range [3 .. 55817]
+      autonomous_system_organization String      351
+GeoLite2-City-Test.mmdb
+  database_type  GeoLite2-City
+  description    map[en:GeoLite2 City Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     1465
+  build_epoch    1770245369 (2026-02-04)
+  networks       242, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 2.125.160.216)
+  city                     Map            11 networks  values [map[geoname_id:2038180 names:map[de:Chángchūn en:Changchun fr:Changchun ja:長春市 ru:Чанчунь zh-CN:长春]] map[geoname_id:2643743 names:map[de:London en:London es:Londres fr:Londres ja:ロンドン pt-BR:Londres ru:Лондон]] map[geoname_id:2655045 names:map[en:Boxford]] map[geoname_id:2694762 names:map[de:Linköping en:Linköping fr:Linköping ja:リンシェーピング zh-CN:林雪平]] map[geoname_id:5391811 names:map[de:San Diego en:San Diego es:San Diego fr:San Diego ja:サンディエゴ pt-BR:San Diego ru:Сан-Диего]] map[geoname_id:5803556 names:map[en:Milton ru:Мильтон]]]
+  continent                Map           242 networks  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+  country                  Map           240 networks
+  location                 Map           242 networks
+  postal                   Map             5 networks  values [map[code:34021] map[code:92101] map[code:92136] map[code:98354] map[code:OX1]]
+  registered_country       Map           240 networks
+  represented_country      Map             1 networks  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+  subdivisions             Slice          11 networks  values [[map[geoname_id:2036500 iso_code:22 names:map[en:Jilin Sheng zh-CN:吉林]]] [map[geoname_id:2685867 iso_code:E names:map[en:Östergötland County fr:Comté d'Östergötland]]] [map[geoname_id:5332921 iso_code:CA names:map[de:Kalifornien en:California es:California fr:Californie ja:カリフォルニア州 pt-BR:Califórnia ru:Калифорния zh-CN:加州]]] [map[geoname_id:5815135 iso_code:WA names:map[en:Washington es:Washington fr:État de Washington ja:ワシントン州 ru:Вашингтон zh-CN:华盛顿州]]] [map[geoname_id:6269131 iso_code:ENG names:map[en:England es:Inglaterra fr:Angleterre pt-BR:Inglaterra]] map[geoname_id:3333217 iso_code:WBK names:map[en:West Berkshire ru:Западный Беркшир zh-CN:西伯克郡]]] [map[geoname_id:6269131 iso_code:ENG names:map[en:England es:Inglaterra fr:Angleterre pt-BR:Inglaterra]]]]
+  shapes:
+    (no flags)                                   242 networks
+      city                     Map          11  values [map[geoname_id:2038180 names:map[de:Chángchūn en:Changchun fr:Changchun ja:長春市 ru:Чанчунь zh-CN:长春]] map[geoname_id:2643743 names:map[de:London en:London es:Londres fr:Londres ja:ロンドン pt-BR:Londres ru:Лондон]] map[geoname_id:2655045 names:map[en:Boxford]] map[geoname_id:2694762 names:map[de:Linköping en:Linköping fr:Linköping ja:リンシェーピング zh-CN:林雪平]] map[geoname_id:5391811 names:map[de:San Diego en:San Diego es:San Diego fr:San Diego ja:サンディエゴ pt-BR:San Diego ru:Сан-Диего]] map[geoname_id:5803556 names:map[en:Milton ru:Мильтон]]]
+      continent                Map         242  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+      country                  Map         240
+      location                 Map         242
+      postal                   Map           5  values [map[code:34021] map[code:92101] map[code:92136] map[code:98354] map[code:OX1]]
+      registered_country       Map         240
+      represented_country      Map           1  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+      subdivisions             Slice        11  values [[map[geoname_id:2036500 iso_code:22 names:map[en:Jilin Sheng zh-CN:吉林]]] [map[geoname_id:2685867 iso_code:E names:map[en:Östergötland County fr:Comté d'Östergötland]]] [map[geoname_id:5332921 iso_code:CA names:map[de:Kalifornien en:California es:California fr:Californie ja:カリフォルニア州 pt-BR:Califórnia ru:Калифорния zh-CN:加州]]] [map[geoname_id:5815135 iso_code:WA names:map[en:Washington es:Washington fr:État de Washington ja:ワシントン州 ru:Вашингтон zh-CN:华盛顿州]]] [map[geoname_id:6269131 iso_code:ENG names:map[en:England es:Inglaterra fr:Angleterre pt-BR:Inglaterra]] map[geoname_id:3333217 iso_code:WBK names:map[en:West Berkshire ru:Западный Беркшир zh-CN:西伯克郡]]] [map[geoname_id:6269131 iso_code:ENG names:map[en:England es:Inglaterra fr:Angleterre pt-BR:Inglaterra]]]]
+GeoLite2-Country-Test.mmdb
+  database_type  GeoLite2-Country
+  description    map[en:GeoLite2 Country Test Database (fake GeoIP2 data, for example purposes only)]
+  languages      [en]
+  binary_format  2.0
+  ip_version     6
+  record_size    28
+  node_count     1505
+  build_epoch    1770245369 (2026-02-04)
+  networks       244, 0 with an empty record
+  aliases        v4mapped yes, 6to4 yes, teredo yes  (tested with 2.125.160.216)
+  continent                Map           244 networks  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+  country                  Map           242 networks
+  registered_country       Map           242 networks
+  represented_country      Map             1 networks  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+  shapes:
+    (no flags)                                   244 networks
+      continent                Map         244  values [map[code:AF geoname_id:6255146 names:map[de:Afrika en:Africa es:África fr:Afrique ja:アフリカ pt-BR:África ru:Африка zh-CN:非洲]] map[code:AS geoname_id:6255147 names:map[de:Asien en:Asia es:Asia fr:Asie ja:アジア pt-BR:Ásia ru:Азия zh-CN:亚洲]] map[code:EU geoname_id:6255148 names:map[de:Europa en:Europe es:Europa fr:Europe ja:ヨーロッパ pt-BR:Europa ru:Европа zh-CN:欧洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:América del Norte fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]] map[code:NA geoname_id:6255149 names:map[de:Nordamerika en:North America es:Norteamérica fr:Amérique du Nord ja:北アメリカ pt-BR:América do Norte ru:Северная Америка zh-CN:北美洲]]]
+      country                  Map         242
+      registered_country       Map         242
+      represented_country      Map           1  values [map[geoname_id:6252001 iso_code:US names:map[de:USA en:United States es:Estados Unidos fr:États-Unis ja:アメリカ合衆国 pt-BR:Estados Unidos ru:США zh-CN:美国] type:military]]
+summary of 21 files
+  anonymizer_confidence              3 files  Uint16
+  autonomous_system_number           2 files  Uint32
+  autonomous_system_organization     2 files  String
+  average_income                     1 files  Uint32
+  city                               7 files  Map
+  connection_type                    1 files  String
+  continent                         10 files  Map
+  country                           10 files  Map
+  domain                             1 files  String
+  ip_risk                            1 files  Float64
+  ipv4_24                            1 files  Uint32
+  ipv4_32                            1 files  Uint32
+  ipv6_32                            1 files  Uint32
+  ipv6_48                            1 files  Uint32
+  ipv6_64                            1 files  Uint32
+  is_anonymous                       3 files  Bool
+  is_anonymous_vpn                   3 files  Bool
+  is_hosting_provider                3 files  Bool
+  is_public_proxy                    3 files  Bool
+  is_residential_proxy               3 files  Bool
+  is_tor_exit_node                   3 files  Bool
+  isp                                1 files  String
+  location                           7 files  Map
+  mobile_country_code                1 files  String
+  mobile_network_code                1 files  String
+  network_last_seen                  3 files  String
+  organization                       1 files  String
+  population_density                 1 files  Uint32
+  postal                             7 files  Map
+  provider_name                      3 files  String
+  registered_country                10 files  Map
+  represented_country               10 files  Map
+  score                              1 files  Float64
+  subdivisions                       7 files  Slice
+  traits                             8 files  Map
+  shapes:
+    (no flags)                                  19 files    5723 networks
+    anonymous+anonymous_vpn                      3 files      26 networks
+    anonymous+anonymous_vpn+hosting_provider+public_proxy+residential_proxy+tor_exit_node   2 files       2 networks
+    anonymous+anonymous_vpn+residential_proxy+tor_exit_node   1 files       1 networks
+    anonymous+anonymous_vpn+tor_exit_node        3 files       3 networks
+    anonymous+hosting_provider                   3 files       6 networks
+    anonymous+public_proxy                       3 files       9 networks
+    anonymous+residential_proxy                  3 files       3 networks
+    anonymous+tor_exit_node                      2 files       2 networks

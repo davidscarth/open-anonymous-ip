@@ -1,0 +1,98 @@
+open-anonymous-ip.mmdb and open-anonymous-ip-plus.mmdb are built by
+open-anonymous-ip from these sources.
+
+--------------------------------------------------------------------------------
+
+Tor Project exit list and Onionoo
+https://check.torproject.org/torbulkexitlist
+https://onionoo.torproject.org/
+
+Tor Project data is published under CC0 1.0, no rights reserved.
+https://creativecommons.org/publicdomain/zero/1.0/
+
+--------------------------------------------------------------------------------
+
+X4BNet lists_vpn (datacenter and VPN lists)
+https://github.com/X4BNet/lists_vpn
+
+MIT License, Copyright (c) 2024 X4B (Mathew Heard)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+--------------------------------------------------------------------------------
+
+IPLocate free proxy list
+https://github.com/iplocate/free-proxy-list
+
+MIT License, Copyright (c) 2025 IPLocate.io
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+--------------------------------------------------------------------------------
+
+Apple Private Relay egress ranges
+https://mask-api.icloud.com/egress-ip-ranges.csv
+
+Private Relay ranges are not redistributed in these files. They are only
+referenced at build time to carve out those addresses from the databases.
+
+--------------------------------------------------------------------------------
+
+VPN by Google egress ranges
+https://www.gstatic.com/vpn/geofeed
+
+VPN by Google ranges are not redistributed in these files. They are only
+referenced at build time to carve out those addresses from the databases.
+
+--------------------------------------------------------------------------------
+
+Google IP address ranges (goog.json and cloud.json)
+https://www.gstatic.com/ipranges/goog.json
+https://www.gstatic.com/ipranges/cloud.json
+
+Google's ranges are not redistributed in these files. The difference of the
+two feeds, Google's own services, is only computed at build time to carve
+out those addresses from the databases.
+
+--------------------------------------------------------------------------------
+
+MISP warninglists, Akamai networks
+https://github.com/MISP/misp-warninglists
+
+MISP warninglists data is published under CC0 1.0, no rights reserved.
+https://creativecommons.org/publicdomain/zero/1.0/
+
+The Akamai ranges are not redistributed in these files. They are only
+referenced at build time to carve out those addresses from the databases.
