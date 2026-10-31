@@ -389,8 +389,7 @@ List formats
   Object Notation (JSON) Data Interchange Format. The cloud providers'
   range feeds and MISP warninglists.
 - [RFC 4180](https://www.rfc-editor.org/rfc/rfc4180), Common Format and
-  MIME Type for CSV Files. Apple's Private Relay feed and IP2Proxy's
-  CSV.
+  MIME Type for CSV Files (e.g. Apple's Private Relay feed).
 - [RFC 3629](https://www.rfc-editor.org/rfc/rfc3629), UTF-8. The
   encoding lists must be in, byte order mark tolerated; UTF-16 and
   invalid UTF-8 are errors.
