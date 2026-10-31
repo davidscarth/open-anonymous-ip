@@ -188,13 +188,14 @@ is missing a third.
 
 ### `is_residential_proxy`
 
-Not currently used. MaxMind defines it as a suspected anonymizing network on a
-residential ISP, excluding peer-to-peer proxies. In practice that means the
-commercial residential proxy services, which route their customer traffic
-out through ordinary home connections, mostly phones and PCs running a free
-app that quietly bundled the service's SDK. No free source lists them, and
-there is no network-level signal to derive them from, since the whole point
-of such a service is that its exits look like anyone else. If we can find
+Not currently used. A residential proxy is a home connection being used as an
+exit for someone else's traffic, which in practice means the commercial
+residential proxy services, which route their customers' traffic out through
+ordinary home connections, mostly phones and PCs running a free app that
+quietly bundled the service's SDK. MaxMind's test data carries the flag on
+networks with a `provider_name`, which fits that reading. No free source lists
+them, and there is no network-level signal to derive them from, since the whole
+point of such a service is that its exits look like anyone else. If we can find
 this data at some point in a free form, it will be added.
 
 ### `is_tor_exit_node`
@@ -227,10 +228,10 @@ How the Tor flag holds up as it ages, F0.5 by window:
 
 ### `anonymizer_confidence`
 
-Plus and Risk only. MaxMind documents it as 1 to 99. We emit five values: 99,
-70, 50, 30, and 10 (steps that map roughly onto the measured decay curve
-below). The longer since an address was last listed, and the fewer days it was
-listed, the lower the confidence.
+Plus and Risk only. The test data shows a range of 1 to 99. We emit five
+values: 99, 70, 50, 30, and 10 (steps that map roughly onto the measured decay
+curve below). The longer since an address was last listed, and the fewer days
+it was listed, the lower the confidence.
 
 The value is set by two things the build already knows about an address, how
 long ago IPLocate last listed it, and on how many distinct days it was listed
@@ -407,7 +408,7 @@ Database format and schema
 - [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339), Date and Time on
   the Internet. `network_last_seen` is its full-date form, `YYYY-MM-DD`,
   a profile of ISO 8601; `build_epoch` is Unix time.
-- [FIPS 180-4](http://csrc.nist.gov/pubs/fips/180-4/upd1/final),
+- [FIPS 180-4](https://csrc.nist.gov/pubs/fips/180-4/upd1/final),
   Secure Hash Standard. The SHA-256 published beside each file.
 
 Sources

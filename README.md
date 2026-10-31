@@ -14,8 +14,7 @@ and the tool for building them. Point the tool at a Tor exit list, a datacenter
 range list, a VPN range list, and it writes one `.mmdb` in the GeoIP2 Anonymous
 IP record layout. Readers that work from the raw MMDB, such as
 [caddy-geoip](https://github.com/davidscarth/caddy-geoip)'s `geoip_anonymous`
-matcher, read it as is. For a reader that wants a MaxMind type string, see
-`-type` below. Ready-made files are published every day.
+matcher, read it as is. Ready-made files are published every day.
 
 ## Released databases
 
