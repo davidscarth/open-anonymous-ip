@@ -127,56 +127,40 @@ short, which means the checker probably missed it once, not that the proxy
 died. Any single snapshot has about 1,100 addresses, but a full day of
 snapshots adds up to about 4,400.
 
-A list that only contains today's data still misses proxies that are
-offline today and back tomorrow (bad recall), and a list that never forgets
-will flag proxies that died months ago (bad precision). We need to pick how
-long to keep these addresses in a way that balances both.
+A list that only contains today's data misses proxies that are offline today
+and back tomorrow, and a list that never forgets flags proxies that died
+months ago. Measured over the history, most addresses that come back do so
+quickly. Of the addresses that drop off for more than 24 hours, the share
+that returned by day N:
 
-We can estimate this by asking questions against historical data. How soon do
-dropped addresses come back? How likely is an address to show up again, given
-how many days ago it was last seen? And if we had built the file with each
-window length on every day of the past year, how well would each one have
-matched what IPLocate listed the next day? That last one is scored with
-F0.5, which counts being right as twice as important as being complete.
+| days |  2 |  3 |  7 | 14 | 30 | 60 |
+|-----:|---:|---:|---:|---:|---:|---:|
+| returned | 47% | 61% | 75% | 81% | 84% | 85% |
 
-| days | how soon they come back (KM) | how likely to show up again (P(back \| gone t)) | how well a window did (F0.5) |
-|-----:|-------------------:|--------------------------------------:|---------------------------:|
-|    1 |                    |                                   75% |                            |
-|    2 |                47% |                                   61% |                            |
-|    3 |                61% |                                   51% |                            |
-|    7 |                75% |                                   29% |                            |
-|   14 |                81% |                                   14% |                        45% |
-|   30 |                84% |                                    6% |                        33% |
-|   45 |                85% |                                    3% |                        28% |
-|   60 |                85% |                                    2% |                        24% |
+The curve is steep through the first week, levels off by two weeks, and is
+flat after. 81% of dropped addresses are back within 14 days, and waiting
+another two weeks raises that to only 84%. An address last seen 7 days ago
+still has a 29% chance of being listed again, so cutting at one week is too
+early. By day 14 that chance has fallen to 14%, and by day 30 to 6%.
 
-The base file has no `anonymizer_confidence` field, so we have to be careful
-when choosing a cutoff. By two weeks most of the addresses that are coming
-back have come back. 81% of dropped addresses are back within two weeks,
-and waiting a month only raises that to 84%. After two weeks each extra day
-of history adds addresses with about a one in seven chance of being seen
-again, and falling. So the base file keeps 14 days.
+The base file lacks a confidence field, so every address is either flagged
+as a proxy or not. Without a way to gauge confidence, we pick a cutoff where
+the curve flattens out (14 days).
 
 Plus and Risk databases have an `anonymizer_confidence` field, so in those we
 can extend the tail out to 30 days and mark it low, and an end user can set
-their own cutoff or use it all. How that value is set is under
+their own cutoff or use the whole range. How that value is set is under
 `anonymizer_confidence`, below.
-
-The replay says the same thing, the two week window beats 30 days by 11
-points, with 45 and 60 further behind, and the lead holds however old the
-copy is. It also says to fetch the files daily. A copy loses about a third
-of its coverage in a month no matter how long its window is, because most
-of what it is missing did not exist yet when it was built.
 
 How the base and Plus files hold up as they age:
 
-| age of database | base precision | base recall | base F0.5 | Plus precision | Plus recall | Plus F0.5 |
-|----------------:|---------------:|------------:|----------:|---------------:|------------:|----------:|
-|           1 day |            40% |         93% |       45% |            29% |         94% |       33% |
-|          7 days |            35% |         81% |       40% |            26% |         83% |       30% |
-|         14 days |            32% |         74% |       36% |            24% |         76% |       28% |
-|         30 days |            28% |         62% |       32% |            21% |         65% |       24% |
-|         90 days |            21% |         38% |       23% |            16% |         41% |       18% |
+| age of database | base precision | base recall | Plus precision | Plus recall |
+|----------------:|---------------:|------------:|---------------:|------------:|
+|           1 day |            40% |         93% |            29% |         94% |
+|          7 days |            35% |         81% |            26% |         83% |
+|         14 days |            32% |         74% |            24% |         76% |
+|         30 days |            28% |         62% |            21% |         65% |
+|         90 days |            21% |         38% |            16% |         41% |
 
 <sup>Plus here is the full 30 day set with no confidence cutoff applied.</sup>
 
