@@ -249,15 +249,9 @@ hours, meaning the source checked them within the day.
 |   8-14 days |           10 |       30 |      30 |
 |  15-30 days |           10 |       10 |      10 |
 
-Relisting is a floor on liveness rather than an estimate of it. IPLocate's list
-is a sample of a larger population of open proxies, and an address it stops
-listing has not necessarily stopped being a proxy, so the rates are how often
-IPLocate saw an address again, not how often it was still there. Tor exits are
-99 with the build date, since the Tor Project checked them within the hour.
-Hosting and VPN ranges carry no confidence because the X4BNet ranges carry no
-liveness signal to derive one from. MaxMind's test data carries the field on
-VPN records, and in IP Risk on hosting records too, so we may add this in the
-future.
+The relisting rates are a floor on liveness. They just say how often IPLocate
+saw an address again, not how often it was still there, so a value of 10 means
+"rarely relisted", not "90% dead".
 
 Plus runs the proxy window to 30 days where the base file stops at 14, as
 described under `is_public_proxy` above. The confidence field is what makes the
