@@ -120,7 +120,7 @@ jobs:
           ./open-anonymous-ip -skip-reserved \
             -hosting lists/x4bnet-datacenter-ipv4.txt -hosting lists/x4bnet-datacenter-ipv6.txt \
             -vpn lists/x4bnet-vpn-ipv4.txt -vpn lists/x4bnet-vpn-ipv6.txt \
-            -exclude lists/apple-private-relay.csv -exclude lists/google-own.txt -exclude lists/google-vpn.csv \
+            -exclude lists/apple-private-relay.csv -exclude lists/google-vpn.csv -exclude lists/google-own.txt \
             -public_proxy lists/iplocate-proxies.txt \
             -tor lists/torproject-exits.txt -tor lists/onionoo-exits-ipv6.txt \
             -o open-anonymous-ip.mmdb > build.txt
@@ -140,7 +140,7 @@ jobs:
           ./open-anonymous-ip -plus -skip-reserved \
             -hosting lists/x4bnet-datacenter-ipv4.txt -hosting lists/x4bnet-datacenter-ipv6.txt \
             -vpn lists/x4bnet-vpn-ipv4.txt -vpn lists/x4bnet-vpn-ipv6.txt \
-            -exclude lists/apple-private-relay.csv -exclude lists/google-own.txt -exclude lists/google-vpn.csv \
+            -exclude lists/apple-private-relay.csv -exclude lists/google-vpn.csv -exclude lists/google-own.txt \
             "${proxies[@]}" \
             -seen "$(date -u +%F)" -confidence 99 -tor lists/torproject-exits.txt -tor lists/onionoo-exits-ipv6.txt \
             -o open-anonymous-ip-plus.mmdb > build-plus.txt
