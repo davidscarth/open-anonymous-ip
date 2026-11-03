@@ -28,6 +28,7 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/X4BNet/lists_vpn/main/output/vpn/ipv4.txt -o lists/x4bnet-vpn-ipv4.txt
           curl -fsSL https://raw.githubusercontent.com/X4BNet/lists_vpn/main/output/vpn/ipv6.txt -o lists/x4bnet-vpn-ipv6.txt
           curl -fsSL https://mask-api.icloud.com/egress-ip-ranges.csv -o lists/apple-private-relay.csv
+          curl -fsSL https://www.gstatic.com/vpn/geofeed -o lists/google-vpn.csv
           # Google's own services (crawlers, DNS, mail) are everything Google announces
           # minus Google Cloud, by Google's own definition of the two feeds.
           curl -fsSL https://www.gstatic.com/ipranges/goog.json -o goog.json
@@ -52,7 +53,6 @@ jobs:
               for part in parts:
                   print(part)
           EOF
-          curl -fsSL https://www.gstatic.com/vpn/geofeed -o lists/google-vpn.csv
           # Open proxies from every half-hourly snapshot IPLocate commits: the last
           # 14 days as one list for the base file, and for the Plus file every
           # address of the last 30 days in a file per last-listed day and
