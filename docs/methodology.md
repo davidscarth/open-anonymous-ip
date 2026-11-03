@@ -201,7 +201,7 @@ past sightings adds no recall at any age of copy and only keeps dead exits. So
 the flag is the current lists as their publishers serve them. The Tor flag
 ages well, a week-old copy is still 95% right and a month-old one 89%.
 
-How the Tor flag holds up as it ages, F0.5 by window:
+How the Tor flag holds up as it ages, precision by window:
 
 | age of database | current list | 7-day window | 14-day window |
 |----------------:|-------------:|-------------:|--------------:|
@@ -259,13 +259,11 @@ liveness signal to derive one from. MaxMind's test data carries the field on
 VPN records, and in IP Risk on hosting records too, so we may add this in the
 future.
 
-Plus runs the proxy window to 30 days where the base file stops at 14. The base
-file has to pick a cutoff, and 14 days is where the cut scores best. Plus
-labels every address with how often addresses like it were listed again, so it
-can carry the window out to where the signal ends instead. Addresses last seen
-15 to 30 days ago come back about one time in ten, they are in the file at
-confidence 10, so an end user who does not want to act on them can filter them
-out.
+Plus runs the proxy window to 30 days where the base file stops at 14, as
+described under `is_public_proxy` above. The confidence field is what makes the
+longer window safe: addresses last seen 15 to 30 days ago come back about one
+time in ten, they are in the file at confidence 10, so an end user who does not
+want to act on them can filter them out.
 
 ### `network_last_seen`
 
