@@ -209,6 +209,7 @@ func TestFormats(t *testing.T) {
 		{"ipv6 network", "2a00:1450::/32\n", []string{"2a00:1450::/32"}},
 		{"ipv4 mapped address", "::ffff:1.2.3.4\n", []string{"1.2.3.4/32"}},
 		{"ipv4 mapped network", "::ffff:1.2.3.0/120\n", []string{"1.2.3.0/24"}},
+		{"ipv4 mapped wide prefix", "::ffff:1.2.3.0/24\n", nil},
 		{"zone refused", "2a00:1450::1%eth0\n", nil},
 		{"brackets refused", "[2a00:1450::1]\n", nil},
 		{"geofeed", geofeed, []string{"5.6.7.0/24", "5.6.8.1/32", "5.6.9.0/24"}},

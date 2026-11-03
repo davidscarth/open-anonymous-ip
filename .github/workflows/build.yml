@@ -52,6 +52,7 @@ jobs:
               for part in parts:
                   print(part)
           EOF
+          curl -fsSL https://www.gstatic.com/vpn/geofeed -o lists/google-vpn.csv
           # Open proxies from every half-hourly snapshot IPLocate commits: the last
           # 14 days as one list for the base file, and for the Plus file every
           # address of the last 30 days in a file per last-listed day and
@@ -96,10 +97,11 @@ jobs:
           if grep -qE '/[0-7]$' lists/*-ipv4.txt || grep -qE '/([0-9]|1[0-9])$' lists/*-ipv6.txt \
             || grep -qiE '^::ffff:[0-9a-f.:]+/(9[6-9]|10[0-3])$' lists/*-ipv6.txt \
             || grep -qE '^[0-9.]+/[0-7],' lists/apple-private-relay.csv || grep -qE '^[0-9a-f:]+/([0-9]|1[0-9]),' lists/apple-private-relay.csv \
-            || grep -qE '^[0-9.]+/[0-7]$' lists/google-own.txt || grep -qE '^[0-9a-f:]+/([0-9]|1[0-9])$' lists/google-own.txt; then
+            || grep -qE '^[0-9.]+/[0-7]$' lists/google-own.txt || grep -qE '^[0-9a-f:]+/([0-9]|1[0-9])$' lists/google-own.txt \
+            || grep -qE '^[0-9.]+/[0-7],' lists/google-vpn.csv || grep -qE '^[0-9a-f:]+/([0-9]|1[0-9]),' lists/google-vpn.csv; then
             echo "a list carries a network wider than /8 or /20"; exit 1
           fi
-          for f in torproject-exits.txt:250 onionoo-exits-ipv6.txt:500 x4bnet-datacenter-ipv4.txt:9000 x4bnet-datacenter-ipv6.txt:1750 x4bnet-vpn-ipv4.txt:2200 x4bnet-vpn-ipv6.txt:100 iplocate-proxies.txt:200 apple-private-relay.csv:10000 google-own.txt:50; do
+          for f in torproject-exits.txt:250 onionoo-exits-ipv6.txt:500 x4bnet-datacenter-ipv4.txt:9000 x4bnet-datacenter-ipv6.txt:1750 x4bnet-vpn-ipv4.txt:2200 x4bnet-vpn-ipv6.txt:100 iplocate-proxies.txt:200 apple-private-relay.csv:10000 google-vpn.csv:500 google-own.txt:50; do
             test "$(wc -l < "lists/${f%%:*}")" -ge "${f##*:}" || { echo "lists/${f%%:*} is too short"; exit 1; }
           done
           test "$(cat plus/*.txt | wc -l)" -ge 200 || { echo "plus/ proxy lists are too short"; exit 1; }
@@ -118,7 +120,7 @@ jobs:
           ./open-anonymous-ip -skip-reserved \
             -hosting lists/x4bnet-datacenter-ipv4.txt -hosting lists/x4bnet-datacenter-ipv6.txt \
             -vpn lists/x4bnet-vpn-ipv4.txt -vpn lists/x4bnet-vpn-ipv6.txt \
-            -exclude lists/apple-private-relay.csv -exclude lists/google-own.txt \
+            -exclude lists/apple-private-relay.csv -exclude lists/google-own.txt -exclude lists/google-vpn.csv \
             -public_proxy lists/iplocate-proxies.txt \
             -tor lists/torproject-exits.txt -tor lists/onionoo-exits-ipv6.txt \
             -o open-anonymous-ip.mmdb > build.txt
@@ -138,22 +140,19 @@ jobs:
           ./open-anonymous-ip -plus -skip-reserved \
             -hosting lists/x4bnet-datacenter-ipv4.txt -hosting lists/x4bnet-datacenter-ipv6.txt \
             -vpn lists/x4bnet-vpn-ipv4.txt -vpn lists/x4bnet-vpn-ipv6.txt \
-            -exclude lists/apple-private-relay.csv -exclude lists/google-own.txt \
+            -exclude lists/apple-private-relay.csv -exclude lists/google-own.txt -exclude lists/google-vpn.csv \
             "${proxies[@]}" \
             -seen "$(date -u +%F)" -confidence 99 -tor lists/torproject-exits.txt -tor lists/onionoo-exits-ipv6.txt \
             -o open-anonymous-ip-plus.mmdb > build-plus.txt
           cat build-plus.txt
           sha256sum open-anonymous-ip-plus.mmdb > open-anonymous-ip-plus.mmdb.sha256
 
-      - name: Point latest at this commit
-        run: |
-          git tag -f latest
-          git push -f origin latest
-
       - name: Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          git tag -f latest
+          git push -f origin latest
           # One line per proxy day-file is noise in the notes, so the
           # plus/ lines are rolled up to one line per confidence. The
           # full list stays in the Build step's log.

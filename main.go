@@ -453,7 +453,10 @@ func parse(s string) (netip.Prefix, bool) {
 		}
 		prefix = netip.PrefixFrom(addr, addr.BitLen())
 	}
-	if a := prefix.Addr(); a.Is4In6() && prefix.Bits() >= 96 {
+	if a := prefix.Addr(); a.Is4In6() {
+		if prefix.Bits() < 96 {
+			return netip.Prefix{}, false
+		}
 		prefix = netip.PrefixFrom(a.Unmap(), prefix.Bits()-96)
 	}
 	return prefix, true
