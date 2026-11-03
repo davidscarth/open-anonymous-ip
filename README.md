@@ -31,8 +31,8 @@ its SHA-256, under the `latest` release. Both are built from:
 | `-public_proxy` | IPLocate [free proxy list](https://github.com/iplocate/free-proxy-list), every address seen in the last 14 days, 30 in Plus | MIT |
 | `-tor` | Tor Project [exit list](https://check.torproject.org/torbulkexitlist) and [Onionoo](https://onionoo.torproject.org/) | CC0 |
 
-<sub>* * These are public data feeds used only to carve out their ranges.
-Nothing from them is added to the files.*</sub>
+<sub>* These are public data feeds used only to carve out their ranges.
+Nothing from them is added to the files.</sub>
 
 Every source whose data enters the files is under a permissive license (MIT or
 Apache-2.0) or public domain (CC0, Unlicense, or 0BSD). Reference material may
