@@ -147,7 +147,7 @@ The base file lacks a confidence field, so every address is either flagged
 as a proxy or not. Without a way to gauge confidence, we pick a cutoff where
 the curve flattens out (14 days).
 
-Plus and Risk databases have an `anonymizer_confidence` field, so in those we
+Plus and Risk databases have the `anonymizer_confidence` field, so in those we
 can extend the tail out to 30 days and mark it low, and an end user can set
 their own cutoff or use the whole range. How that value is set is under
 `anonymizer_confidence`, below.
@@ -401,7 +401,8 @@ Sources
 - IPLocate [free-proxy-list](https://github.com/iplocate/free-proxy-list).
 - Apple, [Prepare your network for iCloud Private Relay](https://developer.apple.com/support/prepare-your-network-for-icloud-private-relay/).
 - Google, [IP address ranges](https://support.google.com/a/answer/10026322)
-  for `goog.json` and `cloud.json`, and
+  for `goog.json` and `cloud.json`,
+  [VPN by Google egress ranges](https://www.gstatic.com/vpn/geofeed), and
   [Googlebot ranges](https://developers.google.com/crawling/docs/verifying-googlebot).
 - MISP [warninglists](https://github.com/MISP/misp-warninglists), CC0.
 
