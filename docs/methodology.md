@@ -10,12 +10,13 @@ paid Anonymous IP database, and can be used as a drop in replacement for it.
 
 To do that, we will approximate the intent of their database using free and
 open data sources, release in their database format, and use their same record
-layout. For confirmed choices they make, we will do the same thing they do.
-For anything we can't confirm, take a best effort approach to do what's right.
-That may be a judgment call (a gut check of our sources), or data driven
-(taking measurements or making comparisons), or some combination of the two.
-And if we feel that MaxMind did something wrong, try and find a compatible way
-to work around it, and document it here.
+layout. For choices they make that we can confirm from the format specification
+or their open test data, we will do the same thing they do. For anything we
+can't confirm, take a best effort approach to do what's right. That may be a
+judgment call (a gut check of our sources), or data driven (taking measurements
+or making comparisons), or some combination of the two. And if we feel that
+MaxMind did something wrong, try and find a compatible way to work around it,
+and document it here.
 
 ## The files
 
