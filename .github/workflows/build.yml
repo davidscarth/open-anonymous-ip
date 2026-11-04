@@ -20,9 +20,13 @@ jobs:
 
       - name: Fetch lists
         run: |
-          mkdir -p lists
+          mkdir -p lists plus
+          # sightings, cmd/sightings, turns the feeds and the proxy lists' git
+          # histories into the lists below.
+          go build -o sightings ./cmd/sightings
           curl -fsSL https://check.torproject.org/torbulkexitlist -o lists/torproject-exits.txt
-          curl -fsSL 'https://onionoo.torproject.org/details?flag=Exit&fields=or_addresses' | jq -r '.relays[].or_addresses[]' | sed -nE 's/^\[(.*)\]:[0-9]+$/\1/p' > lists/onionoo-exits-ipv6.txt
+          curl -fsSL 'https://onionoo.torproject.org/details?flag=Exit&fields=or_addresses' -o onionoo.json
+          ./sightings onionoo -in onionoo.json -out lists/onionoo-exits-ipv6.txt
           curl -fsSL https://raw.githubusercontent.com/X4BNet/lists_vpn/main/output/datacenter/ipv4.txt -o lists/x4bnet-datacenter-ipv4.txt
           curl -fsSL https://raw.githubusercontent.com/X4BNet/lists_vpn/main/output/datacenter/ipv6.txt -o lists/x4bnet-datacenter-ipv6.txt
           curl -fsSL https://raw.githubusercontent.com/X4BNet/lists_vpn/main/output/vpn/ipv4.txt -o lists/x4bnet-vpn-ipv4.txt
@@ -33,66 +37,26 @@ jobs:
           # minus Google Cloud, by Google's own definition of the two feeds.
           curl -fsSL https://www.gstatic.com/ipranges/goog.json -o goog.json
           curl -fsSL https://www.gstatic.com/ipranges/cloud.json -o cloud.json
-          python3 - goog.json cloud.json > lists/google-own.txt <<'EOF'
-          import ipaddress, json, sys
-          def load(path):
-              return [ipaddress.ip_network(p.get("ipv4Prefix") or p.get("ipv6Prefix")) for p in json.load(open(path))["prefixes"]]
-          goog, cloud = load(sys.argv[1]), load(sys.argv[2])
-          for g in goog:
-              parts = [g]
-              for c in cloud:
-                  if c.version != g.version:
-                      continue
-                  kept = []
-                  for part in parts:
-                      if c.subnet_of(part):
-                          kept.extend(part.address_exclude(c))
-                      elif not part.subnet_of(c):
-                          kept.append(part)
-                  parts = kept
-              for part in parts:
-                  print(part)
-          EOF
-          # Open proxies from every half-hourly snapshot IPLocate commits: the last
-          # 14 days as one list for the base file, and for the Plus file every
-          # address of the last 30 days in a file per last-listed day and
-          # confidence. The confidence is the methodology's table: how often
-          # addresses with this age and this many distinct listed days in the
-          # window were listed again within 14 days, rounded to 99, 70, 50, 30,
-          # or 10. The current list alone, at 70, if the clone fails.
-          strip='s|^[a-z0-9]+://||; s/^\[(.*)\]:[0-9]+$/\1/; s/^([0-9.]+):[0-9]+$/\1/'
-          mkdir -p plus
-          if git clone --quiet --shallow-since=30.days https://github.com/iplocate/free-proxy-list proxies-git; then
-            git -C proxies-git log --since=14.days --format=%H -- all-proxies.txt \
-              | while read -r h; do git -C proxies-git show "$h:all-proxies.txt"; done \
-              | sed -E "$strip" | sort -u > lists/iplocate-proxies.txt
-            git -C proxies-git log --since=30.days --format='%H %ct %cs' -- all-proxies.txt \
-              | while read -r h t d; do git -C proxies-git show "$h:all-proxies.txt" | sed -E "$strip" | sort -u | sed "s/$/ $t $d/"; done \
-              | awk -v now="$(date -u +%s)" '
-                  !($1 in last) { last[$1] = $2; on[$1] = $3 }  # newest commit first
-                  !seen[$1, $3]++ { days[$1]++ }
-                  END {
-                    # Age rows in hours since last listed, days-listed columns
-                    # (1, 2-3, 4+), docs/methodology.md "anonymizer_confidence".
-                    split("24 48 120 192 336 720", edge, " ")
-                    conf[1] = "70 70 99"; conf[2] = "30 50 70"; conf[3] = "30 30 70"
-                    conf[4] = "10 30 50"; conf[5] = "10 30 30"; conf[6] = "10 10 10"
-                    for (a in last) {
-                      hrs = (now - last[a]) / 3600
-                      row = 1
-                      while (row <= 6 && hrs >= edge[row]) row++
-                      if (row > 6) continue  # older than the 30-day window
-                      split(conf[row], c, " ")
-                      cls = days[a] >= 4 ? 3 : days[a] >= 2 ? 2 : 1
-                      print a > ("plus/iplocate-proxies-" on[a] "-c" c[cls] ".txt")
-                    }
-                  }'
-          else
-            curl -fsSL https://raw.githubusercontent.com/iplocate/free-proxy-list/main/all-proxies.txt | sed -E "$strip" | sort -u > lists/iplocate-proxies.txt
-            # No history, so nothing says an address is a regular: listed under
-            # 24 hours ago on one known day is 70, not 99.
-            cp lists/iplocate-proxies.txt "plus/iplocate-proxies-$(date -u +%F)-c70.txt"
-          fi
+          ./sightings google -goog goog.json -cloud cloud.json -out lists/google-own.txt
+          # The prefixes of the ASNs ipverse classifies as ISPs, read from the two
+          # repositories without a checkout. They decide which proxy addresses are
+          # residential and are not inserted themselves.
+          git clone --quiet --depth 1 --no-checkout https://github.com/ipverse/as-metadata ipverse-as-metadata
+          git clone --quiet --depth 1 --no-checkout https://github.com/ipverse/as-ip-blocks ipverse-as-ip-blocks
+          ./sightings isp -metadata ipverse-as-metadata -blocks ipverse-as-ip-blocks -out lists/ipverse-isp.txt
+          # Open proxies from every snapshot IPLocate and stormsia commit, folded
+          # into one history per address: the last 14 days as one list for the
+          # base file, and for the Plus file every address of the last 30 days in
+          # a file per last-listed day and confidence. The confidence is the
+          # methodology's table: how often addresses with this age and this many
+          # distinct listed days in the window were listed again within 14 days,
+          # rounded to 99, 70, 50, 30, or 10. Addresses on an ISP network and not
+          # in a hosting range are written to the residential lists as well.
+          git clone --quiet --shallow-since=30.days https://github.com/iplocate/free-proxy-list proxies-iplocate
+          git clone --quiet --shallow-since=30.days https://github.com/stormsia/proxy-list proxies-stormsia
+          ./sightings history -iplocate proxies-iplocate -stormsia proxies-stormsia \
+            -hosting lists/x4bnet-datacenter-ipv4.txt -hosting lists/x4bnet-datacenter-ipv6.txt \
+            -isp lists/ipverse-isp.txt -out lists -plus plus
           wc -l lists/* plus/*
           if grep -qE '/[0-7]$' lists/*-ipv4.txt || grep -qE '/([0-9]|1[0-9])$' lists/*-ipv6.txt \
             || grep -qiE '^::ffff:[0-9a-f.:]+/(9[6-9]|10[0-3])$' lists/*-ipv6.txt \
@@ -101,7 +65,7 @@ jobs:
             || grep -qE '^[0-9.]+/[0-7],' lists/google-vpn.csv || grep -qE '^[0-9a-f:]+/([0-9]|1[0-9]),' lists/google-vpn.csv; then
             echo "a list carries a network wider than /8 or /20"; exit 1
           fi
-          for f in torproject-exits.txt:250 onionoo-exits-ipv6.txt:500 x4bnet-datacenter-ipv4.txt:9000 x4bnet-datacenter-ipv6.txt:1750 x4bnet-vpn-ipv4.txt:2200 x4bnet-vpn-ipv6.txt:100 iplocate-proxies.txt:200 apple-private-relay.csv:10000 google-vpn.csv:500 google-own.txt:50; do
+          for f in torproject-exits.txt:250 onionoo-exits-ipv6.txt:500 x4bnet-datacenter-ipv4.txt:9000 x4bnet-datacenter-ipv6.txt:1750 x4bnet-vpn-ipv4.txt:2200 x4bnet-vpn-ipv6.txt:100 public-proxy.txt:1000 residential.txt:500 ipverse-isp.txt:10000 apple-private-relay.csv:10000 google-vpn.csv:500 google-own.txt:50; do
             test "$(wc -l < "lists/${f%%:*}")" -ge "${f##*:}" || { echo "lists/${f%%:*} is too short"; exit 1; }
           done
           test "$(cat plus/*.txt | wc -l)" -ge 200 || { echo "plus/ proxy lists are too short"; exit 1; }
@@ -121,21 +85,22 @@ jobs:
             -hosting lists/x4bnet-datacenter-ipv4.txt -hosting lists/x4bnet-datacenter-ipv6.txt \
             -vpn lists/x4bnet-vpn-ipv4.txt -vpn lists/x4bnet-vpn-ipv6.txt \
             -exclude lists/apple-private-relay.csv -exclude lists/google-vpn.csv -exclude lists/google-own.txt \
-            -public_proxy lists/iplocate-proxies.txt \
+            -public_proxy lists/public-proxy.txt -residential_proxy lists/residential.txt \
             -tor lists/torproject-exits.txt -tor lists/onionoo-exits-ipv6.txt \
             -o open-anonymous-ip.mmdb > build.txt
           cat build.txt
           sha256sum open-anonymous-ip.mmdb > open-anonymous-ip.mmdb.sha256
           # Plus: the same lists with anonymizer_confidence and network_last_seen.
           # Each proxy file carries its date and confidence in its name, and the
-          # glob orders them oldest first. Tor exits are today's at 99, the Tor
-          # Project checked them within the hour.
+          # glob orders them oldest first, public proxy before residential. Tor
+          # exits are today's at 99, the Tor Project checked them within the hour.
           proxies=()
-          for f in plus/iplocate-proxies-*.txt; do
-            base=${f#plus/iplocate-proxies-}
-            d=${base%-c*}
-            c=${base##*-c}; c=${c%.txt}
-            proxies+=(-seen "$d" -confidence "$c" -public_proxy "$f")
+          for f in plus/public-proxy-*.txt plus/residential-*.txt; do
+            base=${f#plus/}; base=${base%.txt}
+            d=${base%-c*}; d=${d: -10}
+            c=${base##*-c}
+            case $base in public-proxy-*) flag=-public_proxy;; *) flag=-residential_proxy;; esac
+            proxies+=(-seen "$d" -confidence "$c" "$flag" "$f")
           done
           ./open-anonymous-ip -plus -skip-reserved \
             -hosting lists/x4bnet-datacenter-ipv4.txt -hosting lists/x4bnet-datacenter-ipv6.txt \
@@ -154,23 +119,11 @@ jobs:
           git tag -f latest
           git push -f origin latest
           # One line per proxy day-file is noise in the notes, so the
-          # plus/ lines are rolled up to one line per confidence. The
-          # full list stays in the Build step's log.
-          awk '
-            function flush(  i, n, c) {
-              if (!total) return
-              n = split("99 70 50 30 10", ord, " ")
-              for (i = 1; i <= n; i++) {
-                c = ord[i]
-                if (c in sum) printf "%-20s %7d entries  plus/*-c%s.txt (%d files)\n", "is_public_proxy", sum[c], c, files[c]
-              }
-              total = 0; split("", sum); split("", files)
-            }
-            $4 ~ /^plus\// { c = $4; sub(/.*-c/, "", c); sub(/\.txt$/, "", c); sum[c] += $2; files[c]++; total += $2; next }
-            { flush(); print }
-            END { flush() }' build-plus.txt > build-plus-notes.txt
+          # plus/ lines are rolled up to one line per list and confidence.
+          # The full list stays in the Build step's log.
+          ./sightings notes -in build-plus.txt > build-plus-notes.txt
           printf '%s\n\n%s\n\n```\n%s\n```\n\n%s\n\n```\n%s\n```\n' \
-            "Rebuilt daily from the Tor Project exit lists, X4BNet's datacenter and VPN lists, and IPLocate's proxy list. open-anonymous-ip.mmdb is the six-flag Anonymous IP layout, open-anonymous-ip-plus.mmdb the Anonymous Plus layout with a 30-day proxy window and a confidence per address. See the README for what each flag means and where the data comes from, and NOTICE for the data licenses." \
+            "Rebuilt daily from the Tor Project exit lists, X4BNet's datacenter and VPN lists, and the IPLocate and stormsia proxy lists. open-anonymous-ip.mmdb is the six-flag Anonymous IP layout, open-anonymous-ip-plus.mmdb the Anonymous Plus layout with a 30-day proxy window and a confidence per address. See the README for what each flag means and where the data comes from, and NOTICE for the data licenses." \
             "Built by open-anonymous-ip $GITHUB_SHA on $(date -u +%Y-%m-%dT%H:%M:%SZ)." \
             "$(cat build.txt)" \
             "Plus:" \

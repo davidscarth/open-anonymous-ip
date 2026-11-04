@@ -28,7 +28,8 @@ its SHA-256, under the `latest` release. Both are built from:
 | `-exclude` | Apple [Private Relay egress ranges](https://mask-api.icloud.com/egress-ip-ranges.csv) | N/A* |
 | `-exclude` | Google [VPN by Google egress ranges](https://www.gstatic.com/vpn/geofeed) | N/A* |
 | `-exclude` | Google's own services, [everything Google announces](https://www.gstatic.com/ipranges/goog.json) minus [Google Cloud](https://www.gstatic.com/ipranges/cloud.json) | N/A* |
-| `-public_proxy` | IPLocate [free proxy list](https://github.com/iplocate/free-proxy-list), every address seen in the last 14 days, 30 in Plus | MIT |
+| `-public_proxy` | IPLocate [free proxy list](https://github.com/iplocate/free-proxy-list) and stormsia [proxy list](https://github.com/stormsia/proxy-list), every proxy and proxy exit seen in the last 14 days, 30 in Plus | MIT |
+| `-residential_proxy` | IPLocate and stormsia proxy addresses that are on an ISP network by ipverse's [AS metadata](https://github.com/ipverse/as-metadata) and [AS IP blocks](https://github.com/ipverse/as-ip-blocks), and not in a hosting range | MIT |
 | `-tor` | Tor Project [exit list](https://check.torproject.org/torbulkexitlist) and [Onionoo](https://onionoo.torproject.org/) | CC0 |
 
 <sub>* These are public data feeds used only to carve out their ranges.

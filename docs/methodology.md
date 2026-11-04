@@ -115,17 +115,30 @@ IPLocate's [free proxy list][iplocate] (MIT licensed) is small and live, one
 to two thousand addresses that answered in the last half hour, committed to
 [git][iplocate-git] about every half hour.
 
+stormsia's [proxy list][stormsia] (MIT licensed) is a few hundred working
+proxies checked every 15 minutes and committed to git as
+[`proxies.json`][stormsia-json]. For each proxy it records the address and
+the `exit_ip`, the address the checker's request came from after passing
+through the proxy. In 86% of the proxy and exit pairs over five months of
+snapshots (May 29 to November 3, 2026) the two differ: the proxy forwards
+to another machine, and the exit is what a website sees. 49,319 proxy
+addresses led to 111,371 exit addresses, and 76,753 of the exits never
+appeared as a proxy in either list. The proxy addresses overlap IPLocate's
+by 72% over a 14-day window. The exits are what stormsia adds. The build
+reads only the address, the exit, and the commit time from `proxies.json`.
+
 It is good data, live and frequently checked, but not usable for us as-is.
 Public proxies are fickle, they may go up and down, or stay up for a little
 while and never come back. So we need to keep a little history to account for
 that.
 
-Over 425 days of its snapshots (through October 29, 2026, 17,175 snapshots)
-95,171 different addresses passed through it. Most of the time an address
-drops off the list, it is back within the hour. 84% of all gaps are that
-short, which means the checker probably missed it once, not that the proxy
-died. Any single snapshot has about 1,100 addresses, but a full day of
-snapshots adds up to about 4,400.
+Over 425 days of IPLocate's snapshots (through October 29, 2026, 17,175
+snapshots) 95,171 different addresses passed through it. Most of the time
+an address drops off the list, it is back within the hour. 84% of all gaps
+are that short, which means the checker probably missed it once, not that
+the proxy died. Any single snapshot has about 1,100 addresses, but a full
+day of snapshots adds up to about 4,400. A day of stormsia's snapshots adds
+up to about 7,200 addresses.
 
 A list that only contains today's data misses proxies that are offline today
 and back tomorrow, and a list that never forgets flags proxies that died
@@ -133,15 +146,18 @@ months ago. Measured over the history, most addresses that come back do so
 quickly. Of the addresses that drop off for more than 24 hours, the share
 that returned by day N:
 
-| days |  2 |  3 |  7 | 14 | 30 | 60 |
-|-----:|---:|---:|---:|---:|---:|---:|
-| returned | 47% | 61% | 75% | 81% | 84% | 85% |
+| returned by day |  2 |  3 |  7 | 14 | 30 | 60 |
+|---:|---:|---:|---:|---:|---:|---:|
+| IPLocate | 47% | 61% | 75% | 81% | 84% | 85% |
+| stormsia | 37% | 49% | 63% | 70% | 73% | 75% |
 
 The curve is steep through the first week, levels off by two weeks, and is
-flat after. 81% of dropped addresses are back within 14 days, and waiting
-another two weeks raises that to only 84%. An address last seen 7 days ago
-still has a 29% chance of being listed again, so cutting at one week is too
-early. By day 14 that chance has fallen to 14%, and by day 30 to 6%.
+flat after. 81% of IPLocate's dropped addresses are back within 14 days, and
+waiting another two weeks raises that to only 84%. An address last seen 7
+days ago still has a 29% chance of being listed again, so cutting at one
+week is too early. By day 14 that chance has fallen to 14%, and by day 30 to
+6%. stormsia's curve runs about ten points lower and flattens at the same
+point.
 
 The base file lacks a confidence field, so every address is either flagged
 as a proxy or not. Without a way to gauge confidence, we pick a cutoff where
@@ -152,15 +168,26 @@ can extend the tail out to 30 days and mark it low, and an end user can set
 their own cutoff or use the whole range. How that value is set is under
 `anonymizer_confidence`, below.
 
-How the base and Plus files hold up as they age:
+The two lists are folded into one history per address before the windows
+are applied. An address's last listing and its days listed count every
+sighting, as a proxy in either list or as an exit in stormsia's, so an
+address in both lists gets one date and one confidence.
+
+How the base and Plus files hold up as they age, measured on each list
+alone:
 
 | age of database | base precision | base recall | Plus precision | Plus recall |
 |----------------:|---------------:|------------:|---------------:|------------:|
-|           1 day |            40% |         93% |            29% |         94% |
+| IPLocate, 1 day |            40% |         93% |            29% |         94% |
 |          7 days |            35% |         81% |            26% |         83% |
 |         14 days |            32% |         74% |            24% |         76% |
 |         30 days |            28% |         62% |            21% |         65% |
 |         90 days |            21% |         38% |            16% |         41% |
+| stormsia, 1 day |            35% |         91% |            25% |         92% |
+|          7 days |            31% |         81% |            22% |         82% |
+|         14 days |            28% |         73% |            20% |         75% |
+|         30 days |            24% |         62% |            16% |         64% |
+|         90 days |            14% |         40% |            10% |         42% |
 
 <sup>Plus here is the full 30 day set with no confidence cutoff applied.</sup>
 
@@ -172,15 +199,50 @@ is missing a third.
 
 ### `is_residential_proxy`
 
-Not currently used. A residential proxy is a home connection being used as an
-exit for someone else's traffic, which in practice means the commercial
-residential proxy services, which route their customers' traffic out through
-ordinary home connections, mostly phones and PCs running a free app that
-quietly bundled the service's SDK. MaxMind's test data carries the flag on
-networks with a `provider_name`, which fits that reading. No free source lists
-them, and there is no network-level signal to derive them from, since the whole
-point of such a service is that its exits look like anyone else. If we can find
-this data at some point in a free form, it will be added.
+A residential proxy, for this flag, is a proxy address on a consumer ISP's
+network: broadband, DSL, cable, fiber, or mobile. The proxy lists above say
+which addresses are proxies. For the network, [ipverse][ipverse] publishes
+under CC0 a category for every ASN ([as-metadata][ipverse-meta]: `isp`,
+`hosting`, `business`, `education_research`, or `government_admin`) and
+the prefixes every ASN announces ([as-ip-blocks][ipverse-blocks]),
+refreshed daily from the registries and BGP route collectors.
+
+An address from the public proxy lists, proxy or exit, carries this flag
+when it is in a prefix announced by an ASN ipverse classifies as `isp` and
+not in a hosting range from the X4BNet list. The categories are read from
+`as-metadata`; the copy of the category in each `as-ip-blocks` file lags
+it. Nothing from ipverse is inserted into the files.
+
+The two classifications agree where they overlap. Over stormsia's five
+months of exits, 94% of the addresses in X4BNet's hosting ranges are on
+ASNs ipverse calls `hosting`. Of the 79,598 exits outside those ranges,
+ipverse puts 72% on ISPs, 11% on hosting providers X4BNet does not list,
+and 13% on business networks. The last two are why the flag needs a
+positive ISP test and not just "not hosting".
+
+Measured the same way as the public proxies, on the exits on ISP networks
+(57,686 addresses over the 159 days, about 4,200 a day), the share of
+dropped addresses that returned by day N:
+
+| returned by day |  2 |  3 |  7 | 14 | 30 | 60 |
+|---:|---:|---:|---:|---:|---:|---:|
+| exits on ISP networks | 40% | 52% | 66% | 72% | 75% | 77% |
+
+and the files as they age:
+
+| age of database | base precision | base recall | Plus precision | Plus recall |
+|----------------:|---------------:|------------:|---------------:|------------:|
+|           1 day |            40% |         92% |            29% |         93% |
+|          7 days |            36% |         84% |            26% |         84% |
+|         14 days |            33% |         77% |            24% |         78% |
+|         30 days |            29% |         65% |            21% |         66% |
+|         90 days |            18% |         41% |            14% |         43% |
+
+The curve flattens at 14 days and the aging matches IPLocate's within a
+point or two, so the residential lists use the same windows, 14 days in
+the base file and 30 in Plus, and the same confidence table. Every address
+with this flag also carries `is_public_proxy`, and in Plus the same
+`network_last_seen` and `anonymizer_confidence`.
 
 ### `is_tor_exit_node`
 
@@ -218,12 +280,13 @@ curve below). The longer since an address was last listed, and the fewer days
 it was listed, the lower the confidence.
 
 The value is set by two things the build already knows about an address, how
-long ago IPLocate last listed it, and on how many distinct days it was listed
-in the 30 days before the build. The second matters as much as the first. An
-address listed on four or more days that month is a regular and comes back far
-more often than one seen once, at every age. Measured over every daily build
-in the history, this is the share of addresses listed again within 14 days,
-with each class's share of the row in parentheses.
+long ago a proxy list last listed it, and on how many distinct days it was
+listed in the 30 days before the build. The second matters as much as the
+first. An address listed on four or more days that month is a regular and
+comes back far more often than one seen once, at every age. Measured over
+every daily build in IPLocate's history, this is the share of addresses
+listed again within 14 days, with each class's share of the row in
+parentheses.
 
 | last listed | listed 1 day | 2-3 days  | 4+ days   |
 |------------:|-------------:|----------:|----------:|
@@ -249,9 +312,28 @@ hours, meaning the source checked them within the day.
 |   8-14 days |           10 |       30 |      30 |
 |  15-30 days |           10 |       10 |      10 |
 
-The relisting rates are a floor on liveness. They just say how often IPLocate
-saw an address again, not how often it was still there, so a value of 10 means
-"rarely relisted", not "90% dead".
+The relisting rates are a floor on liveness. They just say how often the
+list saw an address again, not how often it was still there, so a value of
+10 means "rarely relisted", not "90% dead".
+
+The same measurement over stormsia's exits on ISP networks, beside
+IPLocate's:
+
+| last listed | listed 1 day | | 2-3 days | | 4+ days | |
+|---:|---:|---:|---:|---:|---:|---:|
+| | IPLocate | stormsia | IPLocate | stormsia | IPLocate | stormsia |
+|   under 24h | 67% | 46% | 79% | 72% | 97% | 97% |
+|      24-48h | 33% | 17% | 53% | 38% | 86% | 84% |
+|     48-120h | 22% | 10% | 38% | 28% | 68% | 70% |
+| 120h-8 days | 15% |  7% | 28% | 20% | 45% | 48% |
+|   8-14 days | 11% |  5% | 21% | 13% | 26% | 26% |
+|  15-30 days |  8% |  4% | 10% |  8% | 10% | 11% |
+
+The 4+ days column, which holds most of the addresses in every row under
+15 days, agrees within three points. The other two columns run lower for
+stormsia, and four cells would map one step down. The two histories are
+folded together before the value is set, so one table is used, the one
+above from IPLocate.
 
 Plus runs the proxy window to 30 days where the base file stops at 14, as
 described under `is_public_proxy` above. The confidence field is what makes the
@@ -261,8 +343,8 @@ want to act on them can filter them out.
 
 ### `network_last_seen`
 
-Plus and Risk only. The date of the last IPLocate snapshot that listed the
-address, and the build date for Tor exits. Hosting and VPN ranges carry none
+Plus and Risk only. The date of the last IPLocate or stormsia snapshot that
+listed the address, and the build date for Tor exits. Hosting and VPN ranges carry none
 in the source data, so we can't include it.
 
 ### `provider_name`
@@ -393,6 +475,9 @@ Sources
   [CollecTor exit list archive](https://collector.torproject.org/archive/exit-lists/).
 - X4BNet [lists_vpn](https://github.com/X4BNet/lists_vpn).
 - IPLocate [free-proxy-list](https://github.com/iplocate/free-proxy-list).
+- stormsia [proxy-list](https://github.com/stormsia/proxy-list).
+- ipverse [as-metadata](https://github.com/ipverse/as-metadata) and
+  [as-ip-blocks](https://github.com/ipverse/as-ip-blocks), CC0.
 - Apple, [Prepare your network for iCloud Private Relay](https://developer.apple.com/support/prepare-your-network-for-icloud-private-relay/).
 - Google, [IP address ranges](https://support.google.com/a/answer/10026322)
   for `goog.json` and `cloud.json`,
@@ -414,3 +499,8 @@ Sources
 [gcloud]: https://www.gstatic.com/ipranges/cloud.json
 [iplocate]: https://github.com/iplocate/free-proxy-list
 [iplocate-git]: https://github.com/iplocate/free-proxy-list/commits/main/all-proxies.txt
+[stormsia]: https://github.com/stormsia/proxy-list
+[stormsia-json]: https://github.com/stormsia/proxy-list/commits/main/web/public/proxies.json
+[ipverse]: https://github.com/ipverse
+[ipverse-meta]: https://github.com/ipverse/as-metadata
+[ipverse-blocks]: https://github.com/ipverse/as-ip-blocks
