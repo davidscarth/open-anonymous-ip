@@ -63,7 +63,7 @@ and a non-anonymous address decodes to all flags false. Reserved networks,
 private space included, are not in the tree and look up as not found. IP Risk
 does not carry the empty record.
 
-#### Type
+### Type
 
 The type strings reported by the test files are `GeoIP2-Anonymous-IP`,
 `GeoIP-Anonymous-Plus`, and `GeoIP2-IP-Risk`. Our files use the same record
