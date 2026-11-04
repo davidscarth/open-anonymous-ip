@@ -369,41 +369,45 @@ network counts toward a flag in proportion to the share of its addresses that
 carry it. The references are checked against, not built from, and none of
 them is in the released files.
 
-Checked October 27, 2026.
+Checked November 3, 2026, with each provider's published feed as the reference.
 
-| Reference | Networks | `anonymous` | `hosting` | `vpn` | `tor` | `public_proxy` |
-|---|---:|---:|---:|---:|---:|---:|
-| AWS | 1,745 | 88% | 88% | 0% | 0% | 0% |
-| Google Cloud | 461 | 97% | 97% | 0% | 0% | 0% |
-| Oracle Cloud | 798 | 100% | 100% | 0% | 0% | 0% |
-| DigitalOcean | 184 | 100% | 100% | 0% | 0% | 0% |
-| Linode | 240 | 99% | 99% | 0% | 0% | 0% |
-| Cloudflare | 15 | 0% | 0% | 0% | 0% | 0% |
-| Mullvad relays | 554 | 100% | 91% | 99% | 0% | 0% |
-| NordVPN servers | 7,035 | 99% | 99% | 62% | 0% | 0% |
-| Private Internet Access servers | 1,522 | 95% | 90% | 50% | 0% | 0% |
-| AirVPN servers | 690 | 91% | 91% | 30% | 0% | 0% |
-| IVPN servers | 177 | 91% | 91% | 25% | 0% | 0% |
-| iCloud Private Relay egress | 3,490 | 0% | 0% | 0% | 0% | 0% |
-| IPLocate proxies, current list | 1,093 | 100% | 43% | 0% | 0% | 100% |
-| Tor Project, Onionoo exits | 652 | 100% | 44% | 22% | 99% | 0% |
-| dan.me.uk Tor exits | 669 | 98% | 49% | 23% | 94% | 0% |
+| Reference | Networks | `anonymous` | `hosting` | `vpn` | `tor` | `public_proxy` | `residential_proxy` |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| AWS | 11,462 | 81% | 81% | 0% | 0% | 0% | 0% |
+| Google Cloud | 1,151 | 100% | 100% | 0% | 0% | 0% | 0% |
+| Oracle Cloud | 1,342 | 98% | 98% | 0% | 0% | 0% | 0% |
+| DigitalOcean | 1,238 | 100% | 100% | 0% | 0% | 0% | 0% |
+| Linode | 5,505 | 99% | 99% | 0% | 0% | 0% | 0% |
+| Cloudflare | 15 | 0% | 0% | 0% | 0% | 0% | 0% |
+| Mullvad relays | 1,135 | 95% | 91% | 62% | 0% | 0% | 0% |
+| NordVPN servers | 7,173 | 99% | 99% | 62% | 0% | 0% | 0% |
+| Private Internet Access servers | 1,662 | 96% | 91% | 53% | 0% | 0% | 0% |
+| AirVPN servers | 2,000 | 91% | 91% | 30% | 0% | 0% | 0% |
+| IVPN servers | 192 | 89% | 89% | 24% | 0% | 0% | 0% |
+| iCloud Private Relay egress | 285,129 | 0% | 0% | 0% | 0% | 0% | 0% |
+| VPN by Google egress | 14,434 | 0% | 0% | 0% | 0% | 0% | 0% |
+| IPLocate proxies, current list | 1,436 | 100% | 36% | 0% | 0% | 100% | 49% |
+| ProxyScrape proxies, current list | 1,565 | 99% | 20% | 0% | 0% | 99% | 58% |
+| Tor Project, Onionoo exits | 2,296 | 98% | 47% | 23% | 96% | 27% | 6% |
+| dan.me.uk Tor exits | 2,089 | 99% | 51% | 25% | 96% | 26% | 6% |
 
-Checked October 28, 2026, with MISP warninglists as the references.
+Checked November 3, 2026, with MISP warninglists as the references.
 
-| Reference | Networks | `anonymous` | `hosting` | `vpn` | `tor` | `public_proxy` |
-|---|---:|---:|---:|---:|---:|---:|
-| Azure | 1,093 | 100% | 100% | 0% | 0% | 0% |
-| OVH shared-hosting clusters | 276 | 100% | 100% | 0% | 0% | 0% |
-| Office 365 | 31 | 100% | 100% | 0% | 0% | 0% |
-| Googlebot | 37 | 100% | 100% | 0% | 0% | 0% |
-| Gmail sending ranges | 2 | 100% | 100% | 0% | 0% | 0% |
-| Akamai | 285 | 95% | 95% | 0% | 0% | 0% |
-| Public DNS resolvers | 61,025 | 9% | 9% | 0% | 0% | 0% |
-| Wikimedia | 7 | 0% | 0% | 0% | 0% | 0% |
-| X4BNet Tor exits | 831 | 93% | 47% | 19% | 82% | 0% |
+| Reference | Networks | `anonymous` | `hosting` | `vpn` | `tor` | `public_proxy` | `residential_proxy` |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Azure | 2,337 | 98% | 98% | 0% | 0% | 0% | 0% |
+| OVH shared-hosting clusters | 622 | 100% | 100% | 0% | 0% | 0% | 0% |
+| Office 365 | 82 | 100% | 100% | 0% | 0% | 0% | 0% |
+| Googlebot | 59 | 39% | 39% | 0% | 0% | 0% | 0% |
+| Gmail sending ranges | 8 | 0% | 0% | 0% | 0% | 0% | 0% |
+| Akamai | 346 | 40% | 40% | 0% | 0% | 0% | 0% |
+| Public DNS resolvers | 62,780 | 10% | 10% | 0% | 0% | 0% | 0% |
+| Wikimedia | 10 | 0% | 0% | 0% | 0% | 0% | 0% |
+| X4BNet Tor exits | 831 | 91% | 54% | 4% | 70% | 27% | 6% |
 
-iCloud Private Relay reads zero because it is excluded.
+iCloud Private Relay, VPN by Google, and Gmail read zero because they are
+excluded. Googlebot reads 39% because part of its published ranges is
+outside the Google-own carve-out.
 
 ## References
 
